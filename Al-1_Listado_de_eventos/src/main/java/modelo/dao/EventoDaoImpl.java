@@ -27,7 +27,7 @@ public class EventoDaoImpl implements IntEventoDao {
 				"Confirmado", 'B', 18, 18, 100, tipo2));
 		lista.add(new Evento(3, "Cumpleaños Sara", "25 aniversario", "02/12/2022", 90,
 				"C/ Plaza Pinares, 8", "Pendiente", 'C', 70, 50, 15.50, tipo3));
-		lista.add(new Evento(4, "Boda de Martin y Lucia", "Boda en el campo", 2022-08-08, 240,
+		lista.add(new Evento(4, "Boda de Martin y Lucia", "Boda en el campo", "2022-08-08", 240,
 				"C/ Diseminados, 12", "Confirmado", 'D', 180, 180, 110, tipo4));
 	}
 
