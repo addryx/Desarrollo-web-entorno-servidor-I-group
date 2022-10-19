@@ -22,12 +22,12 @@ public class EventoDaoImpl implements IntEventoDao {
 		Tipo tipo4 = new Tipo(4, "Boda", "Encuentro donde dos personas se casan");
 		
 		lista.add(new Evento(1, "Concierto de AC/DC", "Última gira del grupo", "11/10/2022", 120,
-				"C/ Avenida Reyes, 10", "Confirmado", 'A', 38000, 18000, 79.99, tipo1));
+				"C/ Avenida Reyes, 10", "Activo", 'A', 38000, 18000, 79.99, tipo1));
 		lista.add(new Evento(2, "Despedida de Antonio", "Se casa con Marta", "31/10/2022", 180, "C/ Arturo Ruiz, 14",
 				"Confirmado", 'B', 18, 18, 100, tipo2));
 		lista.add(new Evento(3, "Cumpleaños Sara", "25 aniversario", "02/12/2022", 90,
 				"C/ Plaza Pinares, 8", "Pendiente", 'C', 70, 50, 15.50, tipo3));
-		lista.add(new Evento(4, "Boda de Martin y Lucia", "Boda en el campo", "12/08/2023", 240,
+		lista.add(new Evento(4, "Boda de Martin y Lucia", "Boda en el campo", 2022-08-08, 240,
 				"C/ Diseminados, 12", "Confirmado", 'D', 180, 180, 110, tipo4));
 	}
 
