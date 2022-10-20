@@ -1,6 +1,8 @@
 package modelo.javabeans;
 
+
 import java.io.Serializable;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -25,7 +27,7 @@ public class Evento implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Evento(int idEvento, String nombre, String descripcion, Date fechaInicio, int duracion, String direccion,
+	public Evento(int idEvento, String nombre, String descripcion, String fechaInicio, int duracion, String direccion,
 			String estado, char destacado, int aforoMaximo, int minimoAsistencia, double precioDecimal, Tipo tipo) {
 		super();
 		this.idEvento = idEvento;
