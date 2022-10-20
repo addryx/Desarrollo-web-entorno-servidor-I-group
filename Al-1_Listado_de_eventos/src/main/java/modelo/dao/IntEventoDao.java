@@ -12,5 +12,7 @@ public interface IntEventoDao {
 	int editarEvento(Evento evento);
 	int eliminarEvento(Evento evento);
 	int eliminarEvento(int idEvento);
-	int cancelarEvento(Evento evento);
+	int cancelarEvento (int idEvento);
+	List<Evento> mostrarActivos();
+
 }

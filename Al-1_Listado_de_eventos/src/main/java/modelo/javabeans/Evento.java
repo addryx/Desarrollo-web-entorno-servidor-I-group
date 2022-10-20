@@ -31,7 +31,7 @@ public class Evento implements Serializable {
 		this.idEvento = idEvento;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		this.fechaInicio = fechaInicio;
+		this.fechaInicio = new Date();
 		this.duracion = duracion;
 		this.direccion = direccion;
 		this.estado = estado;

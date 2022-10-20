@@ -21,25 +21,25 @@
 		String mensaje = null;
 	%>
 	
-	<h1>Bienvenido a Productos App</h1>
+	<h1>Bienvenidos a Eventos App</h1>
 	
 	<h2>Opciones Tipo de Eventos</h2>
 
 	
-	<p><a href="Eventos?opcion=activos">Tipos</a></p>
-	<p><a href="Tipos?opcion=todas">Eventos</a></p>
-	<p><a href="Tipos?opcion=todas">Usuarios</a></p>
-	<p><a href="Tipos?opcion=todas">Eventos/tipo</a></p>
-	<p><a href="Tipos?opcion=todas">Login</a></p>
-	<p><a href="Tipos?opcion=todas">Registro</a></p>
-	<p><a href="Tipos?opcion=todas">Salir</a></p>
+	<p><a href="#">Tipos</a></p>
+	<p><a href="#">Eventos</a></p>
+	<p><a href="#">Usuarios</a></p>
+	<p><a href="#">Eventos/tipo</a></p>
+	<p><a href="#">Login</a></p>
+	<p><a href="#">Registro</a></p>
+	<p><a href="#">Salir</a></p>
 						
 	
 	<h2>Listado de eventos activos</h2>
 	 
 		<h3>Mensajes : <%= (mensaje != null)?mensaje : "" %></h3>
 	 
-	<h3><a href="FormAltaProducto.jsp">Nuevo Evento</a></h3>
+	<h3><a href="FormAltaEvento.jsp">Nuevo Evento</a></h3>
 	<table border="2">
 	<tr>
 	<th>Id</th><th>Nombre</th><th>Precio</th><th COLSPAN="3">Opciones</th>
