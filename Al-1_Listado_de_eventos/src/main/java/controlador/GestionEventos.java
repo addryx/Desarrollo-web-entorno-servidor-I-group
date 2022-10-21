@@ -1,6 +1,8 @@
 package controlador;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -57,7 +59,7 @@ public class GestionEventos extends HttpServlet {
 				procCancelar(request,  response);
 				break;
 			default:
-		System.out.println("opcion incorrecta : " + opcion);
+		System.out.println("Opcion incorrecta: " + opcion);
 		}
 	}
 	
@@ -80,8 +82,6 @@ public class GestionEventos extends HttpServlet {
 		evento.setMinimoAsistencia(Integer.parseInt(request.getParameter("minimoAsistencia")));
 		evento.setPrecioDecimal(Double.parseDouble(request.getParameter("precioDecimal")));
 		//evento.setTipo(Object.parseObj(request.getParameter("tipo")));
-		
-
 	}
 	
 	/**
@@ -110,6 +110,11 @@ public class GestionEventos extends HttpServlet {
 	}
 	
 	protected void procCancelar (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("idEvento"));
+		IntEventoDao ievento = new EventoDaoImpl();
+		Evento evento = ievento.findById(id);
+		request.setAttribute("estado", "cancelado");
 		
+		// TODO Sigo sin verlo como decirle que nos caze el evento que le pasa el request y cambie 1 solo parámetro y no todo.
 	}
 }
