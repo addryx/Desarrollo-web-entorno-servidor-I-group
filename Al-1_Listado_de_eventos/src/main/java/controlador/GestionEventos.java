@@ -84,8 +84,25 @@ public class GestionEventos extends HttpServlet {
 		//evento.setTipo(Object.parseObj(request.getParameter("tipo")));
 	}
 	
+	/**
+	 * Nos creamos una variable id que es igual al parámetro "id" (hay que hacer un casting)
+	 * Ahora nos creamos una variable del tipo interface.
+	 * Nos creamos una variable de tipo Evento donde le pasamos el id del evento, recogido por parámetro. 
+	 * Ahora le damos el atributo que queremo. 
+	 * Y con el requestDispatcher lo mandamos a otro JSP. 
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	protected void procEditar (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int id = Integer.parseInt(request.getParameter("id"));
+		IntEventoDao ievento = new EventoDaoImpl();
+		Evento evento = ievento.findById(id);
+		request.setAttribute("evento", evento);
+		request.getRequestDispatcher("editarEvento.jsp").forward(request, response);
 	}
 	
 	protected void procEliminar (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
