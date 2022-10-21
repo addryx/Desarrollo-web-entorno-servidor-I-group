@@ -39,8 +39,9 @@ public class HomeController extends HttpServlet {
 	 * Ahora nos vamos al index.jsp para recuperar la lista. 
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		IntEventoDao ievento = new EventoDaoImpl();
-		List<Evento> lista = ievento.buscarTodos(); 
+		IntEventoDao edao = new EventoDaoImpl();
+		
+		List<Evento> lista = edao.buscarTodos(); 
 		request.setAttribute("listaEventos", lista);
 		request.getRequestDispatcher("index.jsp").forward(request,response);
 	}

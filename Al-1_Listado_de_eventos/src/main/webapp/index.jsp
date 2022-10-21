@@ -3,20 +3,16 @@
 <%@page import="modelo.dao.EventoDaoImpl"%>
 <%@page import="modelo.dao.IntEventoDao"%>
 
-
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Inicio</title>
 </head>
 <body>
-<body>
 	<%
-	
 		// Aquí recuperamos la lista del HomeController.
 		// Se queda en rojo porque devuelve un Object por lo que hay que hacerle un casting. 
 		// Después se queda en amarillo porque te avisa de que el casting puede que no funcione si la variable
@@ -29,7 +25,6 @@
 	<h1>Bienvenidos a Eventos App</h1>
 	
 	<h2>Opciones Tipo de Eventos</h2>
-
 	
 	<p><a href="#">Tipos</a></p>
 	<p><a href="#">Eventos</a></p>
@@ -37,8 +32,7 @@
 	<p><a href="#">Eventos/tipo</a></p>
 	<p><a href="#">Login</a></p>
 	<p><a href="#">Registro</a></p>
-	<p><a href="#">Salir</a></p>
-						
+	<p><a href="#">Salir</a></p>	
 	
 	<h2>Listado de eventos activos</h2>
 	 
@@ -51,13 +45,12 @@
 	</tr>
 	<% for (Evento ele: lista){ %>
 		<tr>
-		
 		<td><%= ele.getIdEvento() %></td>
 		<td><%= ele.getTipo().getNombre() %></td>
 		<td><%= ele.getPrecioDecimal() %></td>
-		<td><a href="eventos?opcion=editar&id=<%= ele.getIdEvento() %>">Editar Evento</a></td>
-		<td><a href="eventos?opcion=eliminar&id=<%= ele.getIdEvento() %>">Eliminar Evento</a></td>
-		<td><a href="eventos?opcion=cancelar&id=<%= ele.getIdEvento() %>">Cancelar Evento</a></td>
+		<td><a href="Eventos?opcion=editar&id=<%= ele.getIdEvento() %>">Editar Evento</a></td>
+		<td><a href="Eventos?opcion=eliminar&id=<%= ele.getIdEvento() %>">Eliminar Evento</a></td>
+		<td><a href="Eventos?opcion=cancelar&id=<%= ele.getIdEvento() %>">Cancelar Evento</a></td>
 		</tr>
 	<%} %>
 	</table>
