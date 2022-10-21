@@ -1,12 +1,16 @@
 package controlador;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import modelo.dao.EventoDaoImpl;
+import modelo.dao.IntEventoDao;
 import modelo.javabeans.Evento;
 
 import java.io.IOException;
@@ -55,7 +59,7 @@ public class GestionEventos extends HttpServlet {
 				procCancelar(request,  response);
 				break;
 			default:
-		System.out.println("opcion incorrecta : " + opcion);
+		System.out.println("Opcion incorrecta: " + opcion);
 		}
 	}
 	
@@ -78,13 +82,10 @@ public class GestionEventos extends HttpServlet {
 		evento.setMinimoAsistencia(Integer.parseInt(request.getParameter("minimoAsistencia")));
 		evento.setPrecioDecimal(Double.parseDouble(request.getParameter("precioDecimal")));
 		//evento.setTipo(Object.parseObj(request.getParameter("tipo")));
-		
-
 	}
 	
 	protected void procEditar (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//System.out.println(request.getParameter("idEvento").toString());
 	}
 	
 	protected void procEliminar (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -92,6 +93,11 @@ public class GestionEventos extends HttpServlet {
 	}
 	
 	protected void procCancelar (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("idEvento"));
+		IntEventoDao ievento = new EventoDaoImpl();
+		Evento evento = ievento.findById(id);
+		request.setAttribute("estado", "cancelado");
 		
+		// TODO Sigo sin verlo como decirle que nos caze el evento que le pasa el request y cambie 1 solo parámetro y no todo.
 	}
 }

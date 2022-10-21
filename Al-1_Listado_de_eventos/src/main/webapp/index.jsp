@@ -54,7 +54,6 @@
 		<td><a href="eventos?opcion=eliminar&id=<%= ele.getIdEvento() %>">Eliminar Evento</a></td>
 		<td><a href="eventos?opcion=cancelar&id=<%= ele.getIdEvento() %>">Cancelar Evento</a></td>
 		</tr>
-	
 	<%} %>
 	</table>
 </body>
