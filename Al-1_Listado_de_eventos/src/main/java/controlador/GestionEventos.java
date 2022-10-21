@@ -134,6 +134,7 @@ public class GestionEventos extends HttpServlet {
 
 		IntEventoDao edao = new EventoDaoImpl();
 		edao.eliminarEvento(id);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
 	protected void procCancelar(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
@@ -141,5 +142,6 @@ public class GestionEventos extends HttpServlet {
 
 		IntEventoDao edao = new EventoDaoImpl();
 		edao.cancelarEvento(id);
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 }
