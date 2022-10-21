@@ -16,9 +16,14 @@
 <body>
 <body>
 	<%
-		IntEventoDao ievento = new EventoDaoImpl();
-		List<Evento> lista = ievento.buscarTodos(); 
-		String mensaje = null;
+	
+		// Aquí recuperamos la lista del HomeController.
+		// Se queda en rojo porque devuelve un Object por lo que hay que hacerle un casting. 
+		// Después se queda en amarillo porque te avisa de que el casting puede que no funcione si la variable
+		// que metemos como atributo no es la misma del casting hecho. 
+		// Lo mismo con el mensaje (casting para pasar de objeto a String)
+		List<Evento> lista = (List<Evento>)request.getAttribute("listaEventos");
+		String mensaje = (String)request.getAttribute("mensaje");
 	%>
 	
 	<h1>Bienvenidos a Eventos App</h1>
