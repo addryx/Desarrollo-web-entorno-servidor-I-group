@@ -35,10 +35,13 @@
 	<p><a href="#">Salir</a></p>	
 	
 	<h2>Listado de eventos activos</h2>
+	// TODO falta implementar la lista de activos para que salga aquí.
 	 
 		<h3>Mensajes : <%= (mensaje != null)?mensaje : "" %></h3>
 	 
+	// TODO falta implementar el elemento para que recorra la lista al igual que en editar y de el alta.
 	<h3><a href="FormAltaEvento.jsp">Nuevo Evento</a></h3>
+	
 	<table border="2">
 	<tr>
 	<th>Id</th><th>Nombre</th><th>Precio</th><th COLSPAN="3">Opciones</th>

@@ -70,7 +70,9 @@ public class GestionEventos extends HttpServlet {
 	}
 
 	protected void procActivos(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-
+		IntEventoDao edao = new EventoDaoImpl();
+		edao.mostrarActivos();
+		request.getRequestDispatcher("inicio").forward(request, response);
 	}
 
 	protected void procAlta(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
@@ -120,28 +122,41 @@ public class GestionEventos extends HttpServlet {
 	 * @throws IOException
 	 */
 	protected void procEditar(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-		// Pasamos el request a entero para que lo reconozca el método del EventoDaoImpl(findById)
 		int id = Integer.parseInt(request.getParameter("id"));
-
 		IntEventoDao edao = new EventoDaoImpl();
 		Evento evento = edao.findById(id);
+		
 		request.setAttribute("evento", evento);
 		request.getRequestDispatcher("editarEvento.jsp").forward(request, response);
 	}
 
 	protected void procEliminar(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-
 		IntEventoDao edao = new EventoDaoImpl();
 		edao.eliminarEvento(id);
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		
+		String mensaje = null;
+		if(edao.eliminarEvento(id)==1) {
+			mensaje = "Evento eliminado correctamente.";
+		}else {
+			mensaje = "Error. El evento no se ha podido eliminar.";
+		}
+		request.setAttribute("mensaje", mensaje);
+		request.getRequestDispatcher("inicio").forward(request, response);
 	}
 
 	protected void procCancelar(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-
 		IntEventoDao edao = new EventoDaoImpl();
 		edao.cancelarEvento(id);
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		
+		String mensaje = null;
+		if(edao.cancelarEvento(id)==1) {
+			mensaje = "Evento cancelado correctamente.";
+		}else {
+			mensaje = "Error. El evento no se ha podido cancelar.";
+		}
+		request.setAttribute("mensaje", mensaje);
+		request.getRequestDispatcher("inicio").forward(request, response);
 	}
 }
