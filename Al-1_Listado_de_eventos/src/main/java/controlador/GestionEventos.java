@@ -25,23 +25,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class GestionEventos
- */
 @WebServlet("/Eventos")
 public class GestionEventos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public GestionEventos() {
 		super();
 	}
-
+	
+	IntEventoDao edao = new EventoDaoImpl();
+	
 	/**
-	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * En el método service creamos un switch, dentro de éste tenemos las opciones que tendrá disponible el usuario, y para no desarrollar
+	 * los métodos todos juntos, se vincula a un método externo.
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -49,11 +45,18 @@ public class GestionEventos extends HttpServlet {
 		String opcion = request.getParameter("opcion");
 
 		switch (opcion) {
+		/* Hemos quitado ésta opción porque no es necesaria ni hay un botón en la interfaz para sacar la lista de activos, ya que ya sale.
 		case "activos":
 			procActivos(request, response);
 			break;
+		*/
 		case "alta":
-			procAlta(request, response);
+			try {
+				procAlta(request, response);
+			} catch (ServletException | IOException | java.text.ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 		case "editar":
 			procEditar(request, response);
@@ -69,35 +72,46 @@ public class GestionEventos extends HttpServlet {
 		}
 	}
 
+	/**
 	protected void procActivos(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		IntEventoDao edao = new EventoDaoImpl();
 		edao.mostrarActivos();
 		request.getRequestDispatcher("inicio").forward(request, response);
 	}
+	*/
 
-	protected void procAlta(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-		IntEventoDao edao = new EventoDaoImpl();
+	/**
+	 * En este método se crea un nuevo evento, y en cada una de las variables del objeto evento se meten los datos recibidos a través del
+	 * request.getParameter.
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 * @throws java.text.ParseException 
+	 */
+	protected void procAlta(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException, java.text.ParseException {
+		
 		Evento evento = new Evento();
 		
 		evento.setIdEvento(Integer.parseInt(request.getParameter("idEvento")));
-		evento.setNombre(request.getParameter("idNombre"));
+		evento.setNombre(request.getParameter("nombre"));
 		evento.setDescripcion(request.getParameter("descripcion"));
 		
-		// evento.setFechaInicio(request.getParameter("fechaInicio"));
-
+		Date fechaDate = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		fechaDate = sdf.parse(request.getParameter("fechaInicio"));
+		evento.setFechaInicio(fechaDate);
+		
 		evento.setDuracion(Integer.parseInt(request.getParameter("duracion")));
 		evento.setDireccion(request.getParameter("direccion"));
 		evento.setEstado(request.getParameter("estado"));
-		
-		// evento.setDestacado(x.charAt((request.getParameter("destacado")));
-		
+		evento.setDestacado(request.getParameter("destacado"));
 		evento.setAforoMaximo(Integer.parseInt(request.getParameter("aforoMaximo")));
 		evento.setMinimoAsistencia(Integer.parseInt(request.getParameter("minimoAsistencia")));
 		evento.setPrecioDecimal(Double.parseDouble(request.getParameter("precioDecimal")));
+		evento.setTipo(Integer.parseInt(request.getParameter("tipo")));
 		
-		// evento.setTipo(Object.parseObj(request.getParameter("tipo")));
-		
-		edao.insertarEvento(evento);
+		//edao.insertarEvento(evento);
 		
 		String mensaje = null;
 		if(edao.insertarEvento(evento)==1) {
@@ -106,7 +120,8 @@ public class GestionEventos extends HttpServlet {
 			mensaje = "Alta no realizada.";
 		}
 		request.setAttribute("mensaje", mensaje);
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+		request.getSession().setAttribute("listaEventosActivos", ((EventoDaoImpl)edao).mostrarActivos());
+		request.getRequestDispatcher("inicio").forward(request, response);
 	}
 
 	/**
@@ -123,40 +138,57 @@ public class GestionEventos extends HttpServlet {
 	 */
 	protected void procEditar(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		IntEventoDao edao = new EventoDaoImpl();
+		
 		Evento evento = edao.findById(id);
 		
 		request.setAttribute("evento", evento);
+		request.getSession().setAttribute("listaEventosActivos", ((EventoDaoImpl)edao).mostrarActivos());
 		request.getRequestDispatcher("editarEvento.jsp").forward(request, response);
 	}
 
+	/**
+	 * Este método comprueba si el método eliminarEvento devuelve 1 o 0, si exíste lo elimina, si no devuelve un mensaje de error al usuario.
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	protected void procEliminar(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		IntEventoDao edao = new EventoDaoImpl();
+		
 		edao.eliminarEvento(id);
 		
 		String mensaje = null;
-		if(edao.eliminarEvento(id)==1) {
+		if(edao.eliminarEvento(id)==0) {
 			mensaje = "Evento eliminado correctamente.";
 		}else {
 			mensaje = "Error. El evento no se ha podido eliminar.";
 		}
 		request.setAttribute("mensaje", mensaje);
+		request.getSession().setAttribute("listaEventosActivos", ((EventoDaoImpl)edao).mostrarActivos());
 		request.getRequestDispatcher("inicio").forward(request, response);
 	}
 
+	/**
+	 * Este método comprueba si el evento exíste, si exíste lo elimina, si no devuelve un mensaje de error al usuario.
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	protected void procCancelar(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		IntEventoDao edao = new EventoDaoImpl();
+		
 		edao.cancelarEvento(id);
 		
 		String mensaje = null;
-		if(edao.cancelarEvento(id)==1) {
+		if(edao.cancelarEvento(id)==0) {
 			mensaje = "Evento cancelado correctamente.";
 		}else {
 			mensaje = "Error. El evento no se ha podido cancelar.";
 		}
 		request.setAttribute("mensaje", mensaje);
+		request.getSession().setAttribute("listaEventosActivos", ((EventoDaoImpl)edao).mostrarActivos());
 		request.getRequestDispatcher("inicio").forward(request, response);
 	}
 }

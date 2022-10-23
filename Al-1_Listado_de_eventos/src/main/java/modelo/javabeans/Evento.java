@@ -17,18 +17,18 @@ public class Evento implements Serializable {
 	private int duracion;
 	private String direccion;
 	private String estado;
-	private char destacado;
+	private String destacado;
 	private int aforoMaximo;
 	private int minimoAsistencia;
 	private double precioDecimal;
-	private Tipo tipo;
+	private int tipo;
 	
 	public Evento() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Evento(int idEvento, String nombre, String descripcion, Date fechaInicio, int duracion, String direccion,
-			String estado, char destacado, int aforoMaximo, int minimoAsistencia, double precioDecimal, Tipo tipo) {
+			String estado, String destacado, int aforoMaximo, int minimoAsistencia, double precioDecimal, int tipo) {
 		super();
 		this.idEvento = idEvento;
 		this.nombre = nombre;
@@ -100,11 +100,11 @@ public class Evento implements Serializable {
 		this.estado = estado;
 	}
 
-	public char getDestacado() {
+	public String getDestacado() {
 		return destacado;
 	}
 
-	public void setDestacado(char destacado) {
+	public void setDestacado(String destacado) {
 		this.destacado = destacado;
 	}
 
@@ -132,11 +132,19 @@ public class Evento implements Serializable {
 		this.precioDecimal = precioDecimal;
 	}
 
-	public Tipo getTipo() {
-		return tipo;
+	public String getTipo() {
+		if (tipo == 1) {
+			return "Concierto";
+		} else if (tipo == 2){
+			return "Despedida";
+		} else if (tipo == 3){
+			return "Cumpleaños";
+		} else {
+			return "Boda";
+		}
 	}
 
-	public void setTipo(Tipo tipo) {
+	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
 

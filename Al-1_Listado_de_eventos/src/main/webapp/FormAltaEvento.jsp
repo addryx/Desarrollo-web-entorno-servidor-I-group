@@ -9,22 +9,37 @@
 <body>
 	<h1>FORMULARIO DE ALTA DE EVENTO</h1>
 	
-	<form action= "evento?opcion=alta" method="post">
-		<p><input type="text" name= "idEvento">IdEvento</p>
-		<p><input type="text" name= "nombre">Nombre</p>
-		<p><input type="text" name= "descripcion">Descripcion</p>
-		<p><input type="text" name= "fechaInicio">Fecha Inicio</p>
-		<p><input type="text" name= "duracion">duracion</p>
-		<p><input type="text" name= "direccion">duracion</p>
-		<p><input type="text" name= "direccion">duracion</p>
-		<p><input type="text" name= "estado">estado</p>
-		<p><input type="text" name= "destacado" placeholder="Escribe una S si el evento es destacado">destacado</p>
-		<p><input type="text" name= "aforoMaximo">Aforo Maximo</p>
-		<p><input type="text" name= "precio">precio</p>
-		<p><input type="text" name= "tipo">Tipo</p>
-		
-		
-		<p><input type="submit" value= "Enviar"></p>
+	<form action="Eventos?opcion=alta" method="post"><br>
+		IdEvento: <input type="text" name= "idEvento"><br>
+		<br>
+		Nombre: <input type="text" name= "nombre"><br>
+		<br>
+		Descripción: <input type="text" name= "descripcion" ><br>
+		<br>
+		Fecha inicio: <input type="date" name= "fechaInicio"><br>
+		<br>
+		Duración: <input type="text" name= "duracion"><br>
+		<br>
+		Dirección: <input type="text" name= "direccion"><br>
+		<br>
+		Estado: <input type="text" name= "estado" value= "Activo" readonly="readonly"><br>
+		<br>
+		Destacado: <input type="radio" name= "destacado" value="S">S<br>
+		<br>
+		Aforo máximo: <input type="text" name= "aforoMaximo"><br>
+		<br>
+		Mínimo de asistencia: <input type="text" name= "minimoAsistencia"><br>
+		<br>
+		Precio: <input type="text" name= "precioDecimal"><br>
+		<br>
+		Tipo: <select name= "tipo">
+				<option value= 1>Concierto</option>
+				<option value= 2>Despedida</option>
+				<option value= 3>Cumpleaños</option>
+				<option value= 4>Boda</option></select>
+		<br>
+		<br>
+		<p><input type="submit" value="Enviar el formulario"></p>
 	</form>
 
 </body>

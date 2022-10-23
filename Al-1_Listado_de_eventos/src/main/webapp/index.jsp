@@ -19,6 +19,7 @@
 		// que metemos como atributo no es la misma del casting hecho. 
 		// Lo mismo con el mensaje (casting para pasar de objeto a String)
 		List<Evento> lista = (List<Evento>)request.getAttribute("listaEventos");
+		List<Evento> activos = (List<Evento>)request.getAttribute("listaActivos");
 		String mensaje = (String)request.getAttribute("mensaje");
 	%>
 	
@@ -35,21 +36,19 @@
 	<p><a href="#">Salir</a></p>	
 	
 	<h2>Listado de eventos activos</h2>
-	// TODO falta implementar la lista de activos para que salga aquí.
 	 
 		<h3>Mensajes : <%= (mensaje != null)?mensaje : "" %></h3>
 	 
-	// TODO falta implementar el elemento para que recorra la lista al igual que en editar y de el alta.
 	<h3><a href="FormAltaEvento.jsp">Nuevo Evento</a></h3>
 	
 	<table border="2">
 	<tr>
 	<th>Id</th><th>Nombre</th><th>Precio</th><th COLSPAN="3">Opciones</th>
 	</tr>
-	<% for (Evento ele: lista){ %>
+	<% for (Evento ele: activos){ %>
 		<tr>
 		<td><%= ele.getIdEvento() %></td>
-		<td><%= ele.getTipo().getNombre() %></td>
+		<td><%= ele.getTipo() %></td>
 		<td><%= ele.getPrecioDecimal() %></td>
 		<td><a href="Eventos?opcion=editar&id=<%= ele.getIdEvento() %>">Editar Evento</a></td>
 		<td><a href="Eventos?opcion=eliminar&id=<%= ele.getIdEvento() %>">Eliminar Evento</a></td>

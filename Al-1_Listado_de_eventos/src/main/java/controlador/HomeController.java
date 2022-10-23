@@ -1,6 +1,7 @@
 package controlador;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
@@ -40,10 +41,22 @@ public class HomeController extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		IntEventoDao edao = new EventoDaoImpl();
-		
+		/*
 		List<Evento> lista = edao.buscarTodos(); 
 		request.setAttribute("listaEventos", lista);
+		// request.getRequestDispatcher("index.jsp").forward(request,response);
+		*/
+		List<Evento> activos = null;
+		List<Evento> listaEventosActivos = (List<Evento>)request.getSession().getAttribute("listaEventosActivos");
+		if (listaEventosActivos == null) {
+			activos = edao.mostrarActivos();
+		} else {
+			((EventoDaoImpl)edao).setLista(listaEventosActivos);
+			activos = ((EventoDaoImpl)edao).mostrarActivos();
+		}
+		request.setAttribute("listaActivos", activos);
 		request.getRequestDispatcher("index.jsp").forward(request,response);
+		
 	}
 
 }
