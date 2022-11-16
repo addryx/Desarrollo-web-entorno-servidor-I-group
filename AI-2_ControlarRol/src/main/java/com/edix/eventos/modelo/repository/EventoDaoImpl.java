@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
 import com.edix.eventos.modelo.beans.Evento;
 import com.edix.eventos.modelo.beans.Tipo;
 
+// Para que esta clase funcione con un repositorio de Spring, hay que poner la anotación "@Repository". 
+// Esta clase será un componente de Spring. Esta anotación lleva implícita la de "@Component".
+// Todos los componentes de Spring por defecto son singleton; solo hay un objeto creado al mismo tiempo. 
+// La primera vez que se invoca crea el new pero la segunda tira del objeto ya creado. 
 
-
+@Repository
 public class EventoDaoImpl implements IntEventoDao {
 
 	private List<Evento> lista;
