@@ -150,4 +150,36 @@ public class EventoDaoImpl implements IntEventoDao {
 		}
 		return activos;
 	}
+
+	@Override
+	public List<Evento> mostrarDestacados() {
+		List<Evento> destacados = new ArrayList<>();
+		for (Evento ele : lista) {
+			if (ele.getEstado().equals("S")) {
+				destacados.add(ele);
+			}
+		}
+		return destacados;
+	}
+
+	@Override
+	public int detalleEvento(Evento evento) {
+		// TO DO
+		return 0;
+	}
+
+	@Override
+	public int detalleEvento(int idEvento) {
+		Evento evento = findById(idEvento);
+		//evento.getNombre();
+		evento.toString();
+		return 0;
+	}
+	
+	
+	
+	
+	
+	
+	
 }

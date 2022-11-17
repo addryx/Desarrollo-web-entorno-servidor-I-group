@@ -58,12 +58,9 @@ public class EventosController {
 		return "forward:/inicio";
 	}
 	
-	
 	/*
 	@GetMapping("/alta")
 	
 	@PostMapping("/alta")
 	*/
-	
-
 }
