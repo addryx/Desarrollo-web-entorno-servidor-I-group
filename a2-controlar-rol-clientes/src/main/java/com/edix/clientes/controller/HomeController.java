@@ -16,9 +16,6 @@ public class HomeController {
 	@Autowired
 	private IntEventoDao edao;
 	
-	/*@Autowired
-	private IntUsuarioDao udao;*/
-	
 	@GetMapping ("/inicio")
 	public String procesarInicio (Model model) {
 		List<Evento> lista = edao.buscarTodos();
@@ -29,7 +26,18 @@ public class HomeController {
 		model.addAttribute("listaActivos", listaActivos);
 		model.addAttribute("listaDestacados", listaDestacados);
 		// model.addAttribute("listaUsuario", listaUsuario);
-		return "inicioCliente";
+		return "Inicio";
+	}
+	
+	@GetMapping ("/clientes")
+	public String procesarClientes (Model model) {
+		List<Evento> lista = edao.buscarTodos();
+		List<Evento> listaActivos = edao.mostrarActivos();
+		List<Evento> listaDestacados = edao.mostrarDestacados();
+		model.addAttribute("listaEventos", lista);
+		model.addAttribute("listaActivos", listaActivos);
+		model.addAttribute("listaDestacados", listaDestacados);
+		return "InicioCliente";
 	}
 
 }

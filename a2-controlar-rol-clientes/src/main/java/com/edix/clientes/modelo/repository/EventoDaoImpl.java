@@ -102,7 +102,7 @@ public class EventoDaoImpl implements IntEventoDao {
 	public List<Evento> mostrarDestacados() {
 		List<Evento> destacados = new ArrayList<>();
 		for (Evento ele : lista) {
-			if (ele.getEstado().equals("S")) {
+			if (ele.getDestacado().equals("S")) {
 				destacados.add(ele);
 			}
 		}

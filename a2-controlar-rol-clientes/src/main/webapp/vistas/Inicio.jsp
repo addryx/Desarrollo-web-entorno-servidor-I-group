@@ -3,36 +3,21 @@
 <%@page import="com.edix.clientes.modelo.repository.EventoDaoImpl"%>
 <%@page import="com.edix.clientes.modelo.repository.IntEventoDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Vista cliente</title>
+<title>Página de Inicio</title>
 </head>
 <body>
-	<%
-		List<Evento> lista = (List<Evento>)request.getAttribute("listaEventos");
-		List<Evento> activos = (List<Evento>)request.getAttribute("listaActivos");
-		List<Evento> destacados = (List<Evento>)request.getAttribute("listaDestacados");
-		String mensaje = (String)request.getAttribute("mensaje");
-	%>
-	
-	<p><a href="#">Destacados</a></p>
-	<p><a href="#">Activos</a></p>
+	<%List<Evento> activos = (List<Evento>)request.getAttribute("listaActivos");%>
 	
 	<h2>Tipo de Eventos</h2>
 	
-	<p><a href="#">Mis reservas</a></p>
 	<p><a href="/clientes/login">Login</a></p>
 	<p><a href="#">Registro</a></p>
-	<p><a href="#">Salir</a></p>
 	
-	<h3>Bienvenido ${usuario.nombre}</h3>
-	
-	<h2>Listado de eventos destacados</h2>
-	
-	<h3>Mensaje : ${mensaje}</h3>
+	<h2>Listado de eventos activos</h2>
 	
 	<table border="2">
 	<tr>
