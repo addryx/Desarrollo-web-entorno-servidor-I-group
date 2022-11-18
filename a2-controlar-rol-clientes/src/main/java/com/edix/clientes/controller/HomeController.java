@@ -1,0 +1,35 @@
+package com.edix.clientes.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.edix.clientes.modelo.beans.Evento;
+import com.edix.clientes.modelo.repository.IntEventoDao;
+
+@Controller
+public class HomeController {
+	
+	@Autowired
+	private IntEventoDao edao;
+	
+	/*@Autowired
+	private IntUsuarioDao udao;*/
+	
+	@GetMapping ("/inicio")
+	public String procesarInicio (Model model) {
+		List<Evento> lista = edao.buscarTodos();
+		List<Evento> listaActivos = edao.mostrarActivos();
+		List<Evento> listaDestacados = edao.mostrarDestacados();
+		// List<Usuario> listaUsuario = udao.buscarUsuarios();
+		model.addAttribute("listaEventos", lista);
+		model.addAttribute("listaActivos", listaActivos);
+		model.addAttribute("listaDestacados", listaDestacados);
+		// model.addAttribute("listaUsuario", listaUsuario);
+		return "inicioCliente";
+	}
+
+}
