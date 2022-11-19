@@ -1,7 +1,9 @@
+<%@page import="com.edix.clientes.modelo.beans.Reserva"%>
 <%@page import="java.util.List"%>
 <%@page import="com.edix.clientes.modelo.beans.Evento"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,12 +26,14 @@
 	<p>Quedan: </p>
 	
 	<h3>Reserva: </h3>
-	<p>Usuario: ${sesionUsuario.username}</p>
-	<p>Evento: ${evento.idEvento} - ${evento.nombre}</p>
 	<p>${mensaje}</p>
 	<form action="/clientes/reserva/<%=evento.getIdEvento()%>" method="post">
-		<input type="number" name= "cantidad">
-		<input type="submit" value="Enviar">
+		Usuario: <input type="text" name= "usuario" value="${sesionUsuario.username}" readonly=»readonly»><br>
+		Evento: <input type="text" name= "evento" value="${evento.nombre}" readonly=»readonly»><br>
+		Precio unitario: <input type="number" name= "precioVenta" value="${evento.precioDecimal}" readonly=»readonly»><br>
+		Observaciones: <textarea type="textarea" name= "observaciones" autofocus maxlength=90></textarea><br>
+		Cantidad: <input type="number" name= "cantidad"><br>
+		<input type="submit" value="Reservar">
 	</form>
 </body>
 </html>

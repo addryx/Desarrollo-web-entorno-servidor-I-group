@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.edix.clientes.modelo.beans.Evento;
 import com.edix.clientes.modelo.beans.Reserva;
+import com.edix.clientes.modelo.beans.Usuario;
 
 @Repository
 public class ReservaDaoImpl implements IntReservaDao{
@@ -32,7 +33,7 @@ public class ReservaDaoImpl implements IntReservaDao{
 	@Override
 	public int reservar(Reserva reserva) {
 		if (!lista.contains(reserva)) {
-			
+			lista.add(reserva);
 			return 1;
 		}
 		return 0;

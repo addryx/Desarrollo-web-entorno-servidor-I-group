@@ -81,9 +81,10 @@ public class ClientesController {
 		return "DetalleEvento";
 	}
 
-	@PostMapping("/reservar/{id}")
-	public String procReserva(Reserva reserva, @PathVariable("id") int idEvento, RedirectAttributes rattr) {
+	@PostMapping("/reservar/{id}") // TODO
+	public String procReserva(RedirectAttributes rattr, Reserva reserva) {
 		if (rdao.reservar(reserva) == 1) {
+			
 			rattr.addFlashAttribute("mensaje", "Todo correcto, mensaje reserva realizada.");
 		} else {
 			rattr.addFlashAttribute("mensaje", "Problemas al dar de alta, reserva no realizada.");
