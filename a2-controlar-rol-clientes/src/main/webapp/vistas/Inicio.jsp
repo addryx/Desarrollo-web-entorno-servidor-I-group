@@ -18,17 +18,18 @@
 	<p><a href="#">Registro</a></p>
 	
 	<h2>Listado de eventos activos</h2>
+	<h3>${mensaje}</h3>
+	<p>Inicie sesión para ver más.</p>
 	
 	<table border="2">
 	<tr>
-	<th>Nombre</th><th>Aforo</th><th>Fecha inicio</th><th>Opciones</th>
+	<th>Nombre</th><th>Aforo</th><th>Fecha inicio</th>
 	</tr>
 	<% for (Evento ele: activos){ %>
 		<tr>
 		<td><%= ele.getNombre() %></td>
 		<td><%= ele.getAforoMaximo() %></td>
 		<td><%= ele.getFechaInicio() %></td>
-		<td><a href="/eventos/detalle/<%= ele.getIdEvento() %>">Detalle</a></td>
 		</tr>
 	<%} %>
 	</table>

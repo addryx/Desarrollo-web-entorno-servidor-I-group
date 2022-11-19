@@ -12,7 +12,7 @@
 </head>
 <body>
 	<%
-		List<Evento> destacados = (List<Evento>)request.getAttribute("listaDestacados");
+		List<Evento> activos = (List<Evento>)request.getAttribute("listaActivos");
 	%>
 	
 	<p><a href="/clientes/destacados">Destacados</a></p>
@@ -27,7 +27,7 @@
 	
 	<h3>Bienvenido ${sesionUsuario.username}</h3>
 	
-	<h2>Listado de eventos destacados</h2>
+	<h2>Listado de eventos activos</h2>
 	
 	<h3>${mensaje}</h3>
 	
@@ -35,7 +35,7 @@
 	<tr>
 	<th>Nombre</th><th>Aforo</th><th>Fecha inicio</th><th>Opciones</th>
 	</tr>
-	<% for (Evento ele: destacados){ %>
+	<% for (Evento ele: activos){ %>
 		<tr>
 		<td><%= ele.getNombre() %></td>
 		<td><%= ele.getAforoMaximo() %></td>

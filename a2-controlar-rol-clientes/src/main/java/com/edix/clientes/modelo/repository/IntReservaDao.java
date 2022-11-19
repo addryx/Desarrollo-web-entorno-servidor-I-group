@@ -1,0 +1,11 @@
+package com.edix.clientes.modelo.repository;
+
+import java.util.List;
+
+import com.edix.clientes.modelo.beans.Reserva;
+
+public interface IntReservaDao {
+	List<Reserva> buscarTodos();
+	Reserva findById(int idReserva);
+	int reservar(Reserva reserva);
+}

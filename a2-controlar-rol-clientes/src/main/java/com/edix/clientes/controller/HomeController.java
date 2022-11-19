@@ -39,5 +39,16 @@ public class HomeController {
 		model.addAttribute("listaDestacados", listaDestacados);
 		return "InicioCliente";
 	}
+	
+	@GetMapping ("/activosCliente")
+	public String procesarActivos (Model model) {
+		List<Evento> lista = edao.buscarTodos();
+		List<Evento> listaActivos = edao.mostrarActivos();
+		List<Evento> listaDestacados = edao.mostrarDestacados();
+		model.addAttribute("listaEventos", lista);
+		model.addAttribute("listaActivos", listaActivos);
+		model.addAttribute("listaDestacados", listaDestacados);
+		return "ActivosCliente";
+	}
 
 }

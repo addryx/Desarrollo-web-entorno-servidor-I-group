@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Editar evento</title>
+<title>Detalles del evento</title>
 </head>
 <body>
 	<h1>Detalle del Evento Seleccionado</h1>
@@ -23,13 +23,13 @@
 	
 	<p>Quedan: </p>
 	
-	<p>Reserva: </p>
-	<p>Usuario: </p>
-	<p>Evento: </p>
-	<form action="" method="post">
+	<h3>Reserva: </h3>
+	<p>Usuario: ${sesionUsuario.username}</p>
+	<p>Evento: ${evento.idEvento} - ${evento.nombre}</p>
+	<p>${mensaje}</p>
+	<form action="/clientes/reserva/<%=evento.getIdEvento()%>" method="post">
 		<input type="number" name= "cantidad">
 		<input type="submit" value="Enviar">
 	</form>
-	<img src="">
 </body>
 </html>
