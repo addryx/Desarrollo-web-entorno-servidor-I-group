@@ -20,9 +20,7 @@
 	
 	<h2>Tipo de Eventos</h2>
 	
-	<p><a href="#">Mis reservas</a></p>
-	<p><a href="/clientes/login">Login</a></p>
-	<p><a href="#">Registro</a></p>
+	<p><a href="/reservas">Mis reservas</a></p>
 	<p><a href="/clientes/cerrarSesion">Salir</a></p>
 	
 	<h3>Bienvenido ${sesionUsuario.username}</h3>

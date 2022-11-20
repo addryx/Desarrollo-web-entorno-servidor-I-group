@@ -128,4 +128,5 @@ public class Usuario implements Serializable {
 				+ ", fechaRegistro=" + fechaRegistro + "]";
 	}
 
+
 }

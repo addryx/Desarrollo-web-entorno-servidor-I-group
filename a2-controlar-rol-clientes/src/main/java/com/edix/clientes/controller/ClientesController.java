@@ -46,9 +46,13 @@ public class ClientesController {
 
 	@PostMapping("/login")
 	public String procLogin(HttpSession sesion, Usuario usuario, RedirectAttributes rattr) {
+		
 		if (udao.comprobarLogin(usuario.getPassword(), usuario.getUsername()) == 1) {
+			
 			rattr.addFlashAttribute("mensaje", "Login del usuario realizado.");
 			sesion.setAttribute("sesionUsuario", usuario);
+			sesion.setAttribute( "idUsuarioLogeado", usuario.getIdUsuario());
+			
 			System.out.println(sesion.getAttribute("sesionUsuario"));
 			return "redirect:/clientes";
 		} else {
@@ -56,6 +60,8 @@ public class ClientesController {
 			return "redirect:/inicio";
 		}
 	}
+	
+	
 
 	@GetMapping("/cerrarSesion")
 	public String procCerrarSesion(HttpSession sesion, Usuario usuario) {
@@ -82,9 +88,14 @@ public class ClientesController {
 	}
 
 	@PostMapping("/reservar/{id}") // TODO
-	public String procReserva(RedirectAttributes rattr, Reserva reserva) {
-		if (rdao.reservar(reserva) == 1) {
-			
+	public String procReserva(@PathVariable( "idEvento" ) int idEvento, HttpSession sesion, RedirectAttributes rattr, Reserva reserva) {
+		
+		Reserva nuevaReserva = new Reserva(rdao.obtenerId(), edao.findById(idEvento), udao.findById((int) sesion.getAttribute("idUsuarioLogeado")),
+				edao.findById(idEvento).getPrecioDecimal(), reserva.getObservaciones(), reserva.getCantidad());
+		
+		int reservaCreada = rdao.reservar(nuevaReserva);
+		
+		if (reservaCreada == 1 ) {
 			rattr.addFlashAttribute("mensaje", "Todo correcto, mensaje reserva realizada.");
 		} else {
 			rattr.addFlashAttribute("mensaje", "Problemas al dar de alta, reserva no realizada.");
@@ -99,5 +110,17 @@ public class ClientesController {
 		sdf.setLenient(false);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, false));
 	}
-
+	
+	// Métodos
+	
+		@GetMapping("/reservas")
+		public String verReservas(Model model) {
+			
+			// Le paso una lista de TODAS las reservas.
+			
+			model.addAttribute("listadoReservas", rdao.buscarTodos());
+			
+			return "Reservas";
+			
+		}
 }

@@ -7,5 +7,8 @@ import com.edix.clientes.modelo.beans.Reserva;
 public interface IntReservaDao {
 	List<Reserva> buscarTodos();
 	Reserva findById(int idReserva);
+	
+	int totalReservas();
+	int obtenerId();
 	int reservar(Reserva reserva);
 }
