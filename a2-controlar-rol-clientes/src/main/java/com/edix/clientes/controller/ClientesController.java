@@ -87,11 +87,15 @@ public class ClientesController {
 		return "DetalleEvento";
 	}
 
-	@PostMapping("/reservar/{id}") // TODO
-	public String procReserva(@PathVariable( "idEvento" ) int idEvento, HttpSession sesion, RedirectAttributes rattr, Reserva reserva) {
+	@PostMapping("/reservar/{id}") 
+	public String procReserva(@PathVariable( "id" ) int idEvento, HttpSession sesion, RedirectAttributes rattr, @RequestParam("cantidad") int cantidad) {
 		
-		Reserva nuevaReserva = new Reserva(rdao.obtenerId(), edao.findById(idEvento), udao.findById((int) sesion.getAttribute("idUsuarioLogeado")),
-				edao.findById(idEvento).getPrecioDecimal(), reserva.getObservaciones(), reserva.getCantidad());
+		
+		System.out.println(idEvento);
+		System.out.println(cantidad);
+		
+		Reserva nuevaReserva = new Reserva(rdao.obtenerId(), edao.findById(idEvento), (Usuario) sesion.getAttribute("usuario"),
+			edao.findById(idEvento).getPrecioDecimal(), "hola", cantidad);
 		
 		int reservaCreada = rdao.reservar(nuevaReserva);
 		
@@ -100,7 +104,7 @@ public class ClientesController {
 		} else {
 			rattr.addFlashAttribute("mensaje", "Problemas al dar de alta, reserva no realizada.");
 		}
-		return "DetalleEvento";
+		return "redirect:/clientes";
 	}
 	
 
@@ -111,7 +115,6 @@ public class ClientesController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, false));
 	}
 	
-	// Métodos
 	
 		@GetMapping("/reservas")
 		public String verReservas(Model model) {

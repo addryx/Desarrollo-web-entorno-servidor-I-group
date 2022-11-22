@@ -33,7 +33,7 @@
 			</c:forEach>
 			</table>
 			
-			<p><a href="/">volver a inicio</a></p>
+			<p><a href="/clientes">volver a inicio</a></p>
 			
 		</c:if>
 		

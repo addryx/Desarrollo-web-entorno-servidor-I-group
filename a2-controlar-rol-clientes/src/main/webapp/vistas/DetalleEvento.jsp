@@ -16,7 +16,9 @@
 	<%
 	Evento evento = (Evento) request.getAttribute("evento");
 	%>
-	<p>Nombre: ${evento.nombre}</p>
+	<p>
+		Nombre: 
+		<%=evento.getNombre()%></p>
 	<p>
 		Descripción:
 		<%=evento.getDescripcion()%></p>
@@ -48,20 +50,11 @@
 
 	<h3>Reserva:</h3>
 	<p>${mensaje}</p>
-	<form action="/reservar/<%=evento.getIdEvento()%>" method="post">
-		Usuario: 
-		<input type="text" name="usuario" value="${sesionUsuario.username}" readonly=»readonly»><br>
-		Evento: 
-		<input type="text" name="evento" value="${evento.nombre}" readonly=»readonly»><br> 
-		Precio unitario: 
-		<input type="number" name="precioVenta" value="${evento.precioDecimal}" readonly=»readonly»><br> 
-		Observaciones:
-		<textarea type="textarea" name="observaciones" autofocus maxlength=90></textarea><br> 
+	<form action="/clientes/reservar/<%=evento.getIdEvento()%>" method="post">
 		Cantidad: 
 		<input type="number" name="cantidad"><br>
 		<input type="submit" value="Reservar">
 	</form>
-
 
 </body>
 </html>
