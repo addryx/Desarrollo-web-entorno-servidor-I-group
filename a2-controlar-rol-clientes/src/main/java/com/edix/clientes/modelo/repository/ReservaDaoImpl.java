@@ -57,20 +57,30 @@ public class ReservaDaoImpl implements IntReservaDao{
 			return 0;
 	}
 
-
 	@Override
 	public int totalReservas() {
 		// Devuelvo el total de elementos en la lista, para saber cuantas reservas se han hecho.
-				return lista.size();
+		return lista.size();
 	}
-
-
 
 	@Override
 	public int obtenerId() {
 		// Para que no se repita el id le asigno el total de elementos + 1.
-				return (lista.size() + 1 );
+		return (lista.size() + 1 );
 	}
 
-	
+	@Override
+	public int entradasRestantes(Evento evento) {
+		int totalAforo = evento.getAforoMaximo();
+		int idEvento = evento.getIdEvento();
+		int cantidadTotal = 0;
+		
+		for (Reserva ele : lista) {
+			if(idEvento == ele.getEvento().getIdEvento()){
+				cantidadTotal = cantidadTotal + ele.getCantidad();
+			}
+		}
+		int quedan = totalAforo-cantidadTotal;
+		return quedan;
+	}
 }

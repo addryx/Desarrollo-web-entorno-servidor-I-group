@@ -60,8 +60,6 @@ public class ClientesController {
 			return "redirect:/inicio";
 		}
 	}
-	
-	
 
 	@GetMapping("/cerrarSesion")
 	public String procCerrarSesion(HttpSession sesion, Usuario usuario) {
@@ -84,18 +82,15 @@ public class ClientesController {
 	public String mostrarDetalle(Model model, @PathVariable("id") int idEvento) {
 		Evento evento = edao.findById(idEvento);
 		model.addAttribute("evento", evento);
+		model.addAttribute("totalReservas", rdao.obtenerId());
+		model.addAttribute("quedan", rdao.entradasRestantes(evento));
 		return "DetalleEvento";
 	}
 
-	@PostMapping("/reservar/{id}") 
+	@PostMapping("/reservar/{id}")
 	public String procReserva(@PathVariable( "id" ) int idEvento, HttpSession sesion, RedirectAttributes rattr, @RequestParam("cantidad") int cantidad) {
-		
-		
-		System.out.println(idEvento);
-		System.out.println(cantidad);
-		
 		Reserva nuevaReserva = new Reserva(rdao.obtenerId(), edao.findById(idEvento), (Usuario) sesion.getAttribute("usuario"),
-			edao.findById(idEvento).getPrecioDecimal(), "hola", cantidad);
+		edao.findById(idEvento).getPrecioDecimal(), "hola", cantidad);
 		
 		int reservaCreada = rdao.reservar(nuevaReserva);
 		
@@ -106,7 +101,6 @@ public class ClientesController {
 		}
 		return "redirect:/clientes";
 	}
-	
 
 	@InitBinder // Con este método se soluciona el parseo del formato de la fecha.
 	public void initBinder(WebDataBinder binder) {
@@ -115,15 +109,10 @@ public class ClientesController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, false));
 	}
 	
-	
-		@GetMapping("/reservas")
-		public String verReservas(Model model) {
-			
-			// Le paso una lista de TODAS las reservas.
-			
-			model.addAttribute("listadoReservas", rdao.buscarTodos());
-			
-			return "Reservas";
-			
-		}
+	@GetMapping("/reservas")
+	public String verReservas(Model model) {
+		// Le paso una lista de TODAS las reservas.
+		model.addAttribute("listadoReservas", rdao.buscarTodos());
+		return "Reservas";
+	}
 }

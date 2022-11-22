@@ -41,18 +41,15 @@
 		Precio:<%=evento.getPrecioDecimal()%></p>
 
 	<section>
-
 		<!-- Para indicar las entradas restantes, cojo el total de plazas y le resto las plazas reservadas -->
-
-		<p>Quedan: ${ evento.aforoMaximo - cantidad } entradas.</p>
-
+		<p>Quedan: ${quedan} entradas.</p>
 	</section>
 
-	<h3>Reserva:</h3>
+	<h3>Reserva: ${totalReservas}</h3>
 	<p>${mensaje}</p>
 	<form action="/clientes/reservar/<%=evento.getIdEvento()%>" method="post">
 		Cantidad: 
-		<input type="number" name="cantidad"><br>
+		<input type="number" name="cantidad" min=1 max=10>
 		<input type="submit" value="Reservar">
 	</form>
 
