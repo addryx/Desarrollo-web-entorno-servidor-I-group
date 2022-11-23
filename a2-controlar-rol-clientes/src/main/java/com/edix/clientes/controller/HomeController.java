@@ -27,7 +27,7 @@ public class HomeController {
 	
 	/*
 	 * Ponemos la etiqueta @GetMapping ya que la petición viene por GET
-	 * El metodo asociado se encargara de mostrar lista, listasActivos y listaDestacados en el inicio
+	 * El metodo asociado se encargara de crear atributos para llevarlos al JSP "Inicio", listasActivos y listaDestacados.
 	 */
 	@GetMapping ("/inicio")
 	public String procesarInicio (Model model) {
@@ -42,7 +42,7 @@ public class HomeController {
 		return "Inicio";
 	}
 	/*
-	 * El metodo asociado se encargara de mostrar lista, listasActivos y listaDestacados en el InicioCliente
+	 * El metodo asociado se encargara de crear atributos anteriores pero para enviarlos a otro JSP.
 	 */
 	@GetMapping ("/clientes")
 	public String procesarClientes (Model model) {
@@ -55,7 +55,7 @@ public class HomeController {
 		return "InicioCliente";
 	}
 	/*
-	 * El metodo asociado se encargara de mostrar lista, listasActivos y listaDestacados en el ActivosCliente
+	 * El metodo asociado se encargara de crear atributos anteriores pero para enviarlos a otro JSP.
 	 */
 	@GetMapping ("/activosCliente")
 	public String procesarActivos (Model model) {

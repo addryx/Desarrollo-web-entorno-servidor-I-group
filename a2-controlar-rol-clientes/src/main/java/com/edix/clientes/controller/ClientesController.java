@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -27,7 +26,7 @@ import com.edix.clientes.modelo.repository.IntReservaDao;
 import com.edix.clientes.modelo.repository.IntUsuarioDao;
 /*
  * Con la etiqueta @Controller indicamos que se trata de un controlador y que va a llevar todo lo que 
- * tenga que ver con Clientes. 
+ * tenga que ver con /clientes. 
  * Con la etiqueta @RequestMapping estamos sacando el factor comun de la URL.
  */
 @Controller
@@ -99,7 +98,7 @@ public class ClientesController {
 		return "forward:/clientes";
 	}
 	/*
-	 * Con este metodo mostramos los detalles del evento.
+	 * Con este metodo mostramos los detalles del evento en cuestión.
 	 * En los parametros se recoge con la etiqueta @PathVariable el "id" y le pedimos que transforme el 
 	 * String a un entero. 
 	 */
@@ -131,7 +130,7 @@ public class ClientesController {
 		return "redirect:/clientes";
 	}
 	/*
-	 * Con esta etiqueta y el siguiente metodo informamos a Spring de que me pase el String a Date de java.util
+	 * Con esta etiqueta y el metodo informamos a Spring de que me pase el String a Date de java.util
 	 */
 	@InitBinder // Con este método se soluciona el parseo del formato de la fecha.
 	public void initBinder(WebDataBinder binder) {
@@ -140,7 +139,7 @@ public class ClientesController {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, false));
 	}
 	/*
-	 * Con este metodo vemos una lista con todas la reservas.
+	 * Con este metodo vemos un JSP con todas la reservas.
 	 */
 	@GetMapping("/reservas")
 	public String verReservas(Model model) {
