@@ -8,7 +8,10 @@ import org.springframework.stereotype.Repository;
 import com.edix.clientes.modelo.beans.Evento;
 import com.edix.clientes.modelo.beans.Reserva;
 import com.edix.clientes.modelo.beans.Usuario;
-
+/*
+ * Con la etiqueta @Repository indicamos que es un repositorio de datos y que como lleva implicita la etiqueta
+ * @Component estamos indicando que esta clase pasa a ser un componente de Spring
+ */
 @Repository
 public class ReservaDaoImpl implements IntReservaDao{
 
@@ -35,7 +38,10 @@ public class ReservaDaoImpl implements IntReservaDao{
 	public List<Reserva> buscarTodos() {
 		return lista;
 	}
-
+	/*
+	 * Con este metodo buscamos una reserva con su idReserva
+	 * 
+	 */
 	@Override
 	public Reserva findById(int idReserva) {
 		Reserva aux = new Reserva();
@@ -47,7 +53,10 @@ public class ReservaDaoImpl implements IntReservaDao{
 			return (lista.get(pos));
 		}
 	}
-
+	/*
+	 * con este metodo añadimo una reserva a la lista. 
+	 * Si la reserva no se encuentra en la lista, se añade y retorna '1', en caso contrario devuelve '0'
+	 */
 	@Override
 	public int reservar(Reserva reserva) {
 		if (!lista.contains(reserva)) {
@@ -68,7 +77,10 @@ public class ReservaDaoImpl implements IntReservaDao{
 		// Para que no se repita el id le asigno el total de elementos + 1.
 		return (lista.size() + 1 );
 	}
-
+	/*
+	 * Con este metodo calculamos cuantas plazas quedan para los eventos
+	 * A traves de un foreach recorremos la lista y calcula cuantas entradas quedan.
+	 */
 	@Override
 	public int entradasRestantes(Evento evento) {
 		int totalAforo = evento.getAforoMaximo();
