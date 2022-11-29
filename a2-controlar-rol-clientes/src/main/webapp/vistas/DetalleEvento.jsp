@@ -13,32 +13,30 @@
 <body>
 	<h1>Detalle del Evento Seleccionado</h1>
 
-	<%
-	Evento evento = (Evento) request.getAttribute("evento");
-	%>
 	<p>
 		Nombre: 
-		<%=evento.getNombre()%></p>
+		${evento.nombre}</p>
 	<p>
 		Descripción:
-		<%=evento.getDescripcion()%></p>
+		${evento.descripcion}</p>
 	<p>
 		Dirección:
-		<%=evento.getDireccion()%></p>
+		${evento.direccion}</p>
 	<p>
 		Fecha inicio:
-		<%=evento.getFechaInicio()%></p>
+		${evento.fechaInicio }</p>
 	<p>
 		Duración:
-		<%=evento.getDuracion()%></p>
+		${evento.duracion}</p>
 	<p>
 		Aforo máximo:
-		<%=evento.getAforoMaximo()%></p>
+		${evento.aforoMaximo}</p>
 	<p>
 		Minimo asistencia:
-		<%=evento.getMinimoAsistencia()%></p>
+		${evento.minimoAsistencia}</p>
 	<p>
-		Precio:<%=evento.getPrecioDecimal()%></p>
+		Precio:
+		${evento.precioDecimal}</p>
 
 	<section>
 		<!-- Para indicar las entradas restantes, cojo el total de plazas y le resto las plazas reservadas -->
@@ -46,8 +44,10 @@
 	</section>
 
 	<h3>Reserva: ${totalReservas}</h3>
+	
 	<p>${mensaje}</p>
-	<form action="/clientes/reservar/<%=evento.getIdEvento()%>" method="post">
+	
+	<form action="/clientes/reservar/${evento.idEvento}" method="post">
 		Cantidad: 
 		<input type="number" name="cantidad" min=1 max=10>
 		<input type="submit" value="Reservar">
